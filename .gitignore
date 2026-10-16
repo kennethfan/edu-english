@@ -1,0 +1,28 @@
+node_modules/
+
+# 由 scripts/prepare-www.mjs 生成
+www/index.html
+# 由 esbuild 生成
+www/shim.js
+# 由 scripts/make-audio.py 生成（9085 条发音音频，可重建）
+www/audio/
+# 音频生成的中间产物（原始合成 MP3、索引、断点续传清单）
+.work/
+
+# Android 构建产物（原生工程本身保留在版本库）
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/app/src/main/assets/public/
+
+# 签名相关（切勿入库）
+keystore.properties
+*.jks
+*.keystore
+
+# 真机验收截图等临时产物
+artifacts/
+
+.DS_Store
+*.log

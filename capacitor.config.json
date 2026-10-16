@@ -1,0 +1,8 @@
+{
+  "appId": "com.kenneth.wordmatch",
+  "appName": "单词对对碰",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
