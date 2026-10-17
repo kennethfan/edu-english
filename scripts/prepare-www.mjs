@@ -9,7 +9,10 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const SRC = '/Users/kenneth/agent/edu/单词匹配精校版-PEP-CET-全26册.html';
+// 源 HTML：优先环境变量 → 仓库内 source/（CI 用）→ 兼容旧的本机绝对路径
+const SRC = process.env.WM_SOURCE_HTML
+  || resolve(__dirname, '../source/单词匹配精校版-PEP-CET-全26册.html')
+  || '/Users/kenneth/agent/edu/单词匹配精校版-PEP-CET-全26册.html';
 const OUT = resolve(__dirname, '../www/index.html');
 const SHIM_TAG = '<script src="shim.js"></script>';
 const PATCH_STYLE_ID = 'wm-theme-patch-style';
