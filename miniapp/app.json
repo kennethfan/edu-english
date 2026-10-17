@@ -176,10 +176,10 @@
     }
   ],
   "window": {
-    "navigationBarBackgroundColor": "#171b26",
-    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#fff6ea",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "单词对对碰",
-    "backgroundColor": "#171b26",
+    "backgroundColor": "#fff6ea",
     "backgroundTextStyle": "light"
   },
   "lazyCodeLoading": "requiredComponents",

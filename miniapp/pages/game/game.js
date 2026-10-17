@@ -27,7 +27,7 @@ Page({
     doneAll: false,     // 本册是否全部通关（选册页展示用不着，这里控制进度条文案）
     autoMode: false,    // 自动学习：自动配对 + 朗读（App 线同款）
     autoPaused: false,
-    themeCls: 'theme-dark',
+    themeCls: 'theme-kids',
   },
 
   onLoad(query) {
@@ -43,6 +43,7 @@ Page({
 
     let b = require('../../core/books-meta.js').books.find((x) => x.id === this.bookId);
     this.bookMeta = b || {};
+    theme.applyNav();
     this.setData({
       bookId: this.bookId,
       bookLabel: this.drillMode ? '错词重刷' : ((b && b.label) || this.bookId),

@@ -44,7 +44,7 @@ Page({
     summary: '（未加载）',
     playState: '（未播放）',
     logs: [],
-    themeCls: 'theme-dark',
+    themeCls: 'theme-kids',
     // ---- 首页产品信息 ----
     statPercent: 0,
     statDone: 0,
@@ -69,6 +69,7 @@ Page({
       const b = META.books.find((x) => x.id === last.book);
       if (b) lastLabel = b.label + ' · 第 ' + (last.level + 1) + ' 关';
     }
+    theme.applyNav();
     this.setData({
       themeCls: theme.cls(),
       statDone: done,

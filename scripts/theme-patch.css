@@ -1,0 +1,120 @@
+/* App 端主题补丁：与小程序同一套视觉 token（core/theme.js 同源）
+ * 作用域：html[data-wm-theme="dark"|"kids"]，重定义 .wm-root 的 --wm-* 变量
+ * 与 Bootstrap 的 --bs-body-* 变量；对少数硬编码色值做定点覆盖。 */
+
+/* ================= 深色（石墨蓝灰，默认） ================= */
+html[data-wm-theme="dark"] {
+  color-scheme: dark;
+  --bs-body-bg: #171b26;
+  --bs-body-color: #e9ebf2;
+  --bs-secondary-color: #9aa3b8;
+  --bs-border-color: #333a4c;
+  --bs-primary: #3d7bfd;
+}
+
+html[data-wm-theme="dark"] body {
+  background-color: #171b26 !important;
+  color: #e9ebf2 !important;
+}
+
+html[data-wm-theme="dark"] .wm-root {
+  --wm-surface: #1f2430;
+  --wm-ink: #e9ebf2;
+  --wm-line: #333a4c;
+  --wm-muted: #9aa3b8;
+  --wm-accent: #3d7bfd;
+  --wm-done-bg: #2a3040;
+  --wm-done-ink: #9aa3b8;
+  --wm-done-line: #333a4c;
+  --wm-ok: #4ade80;
+  --wm-ok-bg: rgba(74, 222, 128, 0.12);
+  --wm-ok-hi: rgba(74, 222, 128, 0.24);
+  --wm-ok-ink: #4ade80;
+  --wm-sel-bg: rgba(61, 123, 253, 0.16);
+  --wm-sel-ink: #8ab5ff;
+  --wm-sel-line: #3d7bfd;
+  --wm-wrong-bg: rgba(248, 113, 113, 0.14);
+  --wm-wrong-ink: #ff8f8f;
+  --wm-wrong-line: #f87171;
+}
+
+/* 深色下的硬编码浅色定点覆盖 */
+html[data-wm-theme="dark"] .wm-modal {
+  background: var(--wm-surface);
+}
+
+html[data-wm-theme="dark"] .wm-book-item {
+  background: #1f2430;
+}
+
+html[data-wm-theme="dark"] .wm-seg {
+  background: #2a3040;
+}
+
+html[data-wm-theme="dark"] .text-muted {
+  color: #9aa3b8 !important;
+}
+
+/* ================= 儿童活泼（暖奶油） ================= */
+html[data-wm-theme="kids"] {
+  color-scheme: light;
+  --bs-body-bg: #fff6ea;
+  --bs-body-color: #43342a;
+  --bs-secondary-color: #a08b78;
+  --bs-border-color: #ffe0bd;
+  --bs-primary: #ff8a3d;
+}
+
+html[data-wm-theme="kids"] body {
+  background-color: #fff6ea !important;
+  color: #43342a !important;
+}
+
+html[data-wm-theme="kids"] .wm-root {
+  --wm-surface: #ffffff;
+  --wm-ink: #43342a;
+  --wm-line: #ffe0bd;
+  --wm-muted: #a08b78;
+  --wm-accent: #ff8a3d;
+  --wm-done-bg: #f7ead9;
+  --wm-done-ink: #b3a08c;
+  --wm-done-line: #f0e2cf;
+  --wm-ok: #2fb56f;
+  --wm-ok-bg: #ddf7e6;
+  --wm-ok-hi: #bdeecf;
+  --wm-ok-ink: #12784a;
+  --wm-sel-bg: #ffe9d6;
+  --wm-sel-ink: #c96a1f;
+  --wm-sel-line: #ff8a3d;
+  --wm-wrong-bg: #ffe6e6;
+  --wm-wrong-ink: #d92d20;
+  --wm-wrong-line: #f96868;
+}
+
+html[data-wm-theme="kids"] .wm-seg {
+  background: #f0e2cf;
+}
+
+/* ================= 主题切换浮钮 ================= */
+#wm-theme-toggle {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 3000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--wm-line, #e5e8ec);
+  background: var(--wm-surface, #fff);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  font-size: 22px;
+  line-height: 44px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease;
+}
+
+#wm-theme-toggle:active {
+  transform: scale(0.92);
+}

@@ -8,7 +8,7 @@ const TABS = ['全部'].concat(STAGE_ORDER);
 
 Page({
   data: {
-    themeCls: 'theme-dark',
+    themeCls: 'theme-kids',
     theme: 'dark',
     side: TABS,
     activeStage: '全部',
@@ -21,7 +21,9 @@ Page({
   },
 
   onShow() {
-    this.setData({ themeCls: theme.cls(), theme: theme.getTheme() });
+    const t = theme.getTheme();
+    this.setData({ themeCls: theme.cls(t), theme: t });
+    theme.applyNav(t);
     this.refresh();
   },
 

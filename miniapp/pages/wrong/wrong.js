@@ -5,13 +5,15 @@ const game = require('../../core/game.js');
 
 Page({
   data: {
-    themeCls: 'theme-dark',
+    themeCls: 'theme-kids',
     items: [],     // [{en, zh, count, bookLabel}]
     total: 0,
   },
 
   onShow() {
-    this.setData({ themeCls: require('../../core/theme.js').cls() });
+    const theme = require('../../core/theme.js');
+    this.setData({ themeCls: theme.cls() });
+    theme.applyNav();
     this.refresh();
   },
 
