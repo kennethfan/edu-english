@@ -1,8 +1,10 @@
 # 单词对对碰
 
-人教版小学 / 初中 / 高中 + 大学四六级词库的**单词配对练习**工具，双端同源：
-**微信小程序** + **Android App（Capacitor）**，判分 / 出题 / 音频逻辑逐字节一致。
+人教版小学 / 初中 / 高中 + 大学四六级词库的**单词配对练习**工具，三端同源：
+**网页版（GitHub Pages）** + **微信小程序** + **Android App（Capacitor）**，
+判分 / 出题 / 音频逻辑逐字节一致。
 
+- **网页版（免安装，即开即玩）**：https://kennethfan.github.io/edu-english/
 - 词库：26 册 · 3442 关 · 13632 词条 · 9085 条发音音频（离线可玩）
 - 功能：选册续玩、配对玩法、进度持久化、自动学习（自动配对跟读）、错题本（错词重刷）
 - 双主题：儿童模式（暖奶油，默认）/ 深色模式（石墨蓝灰），右下角浮动钮切换
@@ -14,7 +16,7 @@
 │                                         # 位于仓库上级目录 edu/ 下
 ├── scripts/                             # 构建 / 生成脚本
 │   ├── prepare-www.mjs                  #   生成 www/index.html（复制源 HTML + 注入 shim 与主题补丁）
-│   ├── theme-patch.css / .js            #   App 端双主题补丁（与小程序同 token）
+│   ├── theme-patch.css / .js            #   App/网页端双主题补丁（与小程序同 token）
 │   ├── make-audio.py                    #   edge-tts 合成发音 → .work/raw（原始 MP3 池）
 │   ├── miniapp_extract.py               #   小程序分包装配（关级贪心装箱 + canonical 音频去重）
 │   └── gen_meta.py                      #   生成小程序主包元数据（书名册 / 词→包音频归属）
@@ -22,10 +24,14 @@
 │   ├── core/                            #   pkgs/loaders/game/store/theme/audiomap/books-meta
 │   ├── pages/                           #   index（首页）/ books（选册）/ game（配对）/ wrong（错题本）
 │   └── packages/b01..b28/               #   分包（data.js + 占位页；audio/ 为生成产物不入库）
-├── www/                                 # Android App 的 Web 资产（生成产物）
+├── www/                                 # 网页版 / Android App 的 Web 资产（生成产物）
 ├── android/                             # Capacitor 8 原生工程
 └── docs/                                # 设计文档 / ADR
 ```
+
+**网页版发布**：`gh-pages` 分支承载 `www/` 构建产物（index.html + shim.js +
+`audio/` 9085 条 ogg），由 GitHub Pages 直接服务，与 master 解耦——master 保持
+无音频的干净代码库，网页版更新时重建 gh-pages 分支推送即可。
 
 ## 双端架构与同源性
 
