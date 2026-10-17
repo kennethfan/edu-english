@@ -1,0 +1,56 @@
+<view class="wrap {{themeCls}}">
+
+  <!-- Hero -->
+  <view class="hero">
+    <view class="hero-title">单词对对碰</view>
+    <view class="hero-sub">26 册 · 3442 关 · 离线可玩</view>
+  </view>
+
+  <!-- 总进度 -->
+  <view class="stat">
+    <view class="stat-row">
+      <text class="stat-big">{{statPercent}}%</text>
+      <text class="stat-sub">已学 {{statDone}} / {{statTotal}} 关</text>
+    </view>
+    <view class="stat-bar">
+      <view class="stat-fill" style="width: {{statPercent}}%"></view>
+    </view>
+  </view>
+
+  <!-- 主按钮：继续学习 / 开始学习 -->
+  <button class="cta" bindtap="primaryAction" hover-class="cta-hover">
+    <view class="cta-main">{{lastLabel ? '继续学习' : '开始学习'}}</view>
+    <view class="cta-sub">{{lastLabel || '从 26 册中选一册开始'}}</view>
+  </button>
+
+  <!-- 功能入口 -->
+  <view class="entries">
+    <view class="entry" bindtap="goBooks" hover-class="entry-hover">
+      <view class="entry-icon">📚</view>
+      <view class="entry-name">选册学习</view>
+    </view>
+    <view class="entry" bindtap="goWrong" hover-class="entry-hover">
+      <view class="entry-icon">📝</view>
+      <view class="entry-name">错题本</view>
+      <view class="entry-badge" wx:if="{{wrongCount > 0}}">{{wrongCount}}</view>
+    </view>
+  </view>
+
+  <!-- 系统诊断（折叠） -->
+  <view class="diag">
+    <view class="diag-head" bindtap="toggleDiag">
+      <text>系统自检</text>
+      <text class="diag-arrow {{diagOpen ? 'is-open' : ''}}">▸</text>
+    </view>
+    <view wx:if="{{diagOpen}}" class="diag-body">
+      <view class="diag-summary">分包数据：{{summary}}</view>
+      <view class="diag-summary">音频状态：{{playState}}</view>
+      <button class="btn diag-btn" bindtap="onLoadAll">① 全量加载分包</button>
+      <button class="btn diag-btn" bindtap="onPlaySamePkg">② 同包音频连播（每包1词）</button>
+      <button class="btn diag-btn" bindtap="onPlayCrossPkg">③ 跨包音频连播（canonical）</button>
+      <button class="btn diag-btn" bindtap="onHashCheck">④ 哈希抽查（4 词）</button>
+      <view class="log" wx:for="{{logs}}" wx:key="index">{{item}}</view>
+    </view>
+  </view>
+
+</view>

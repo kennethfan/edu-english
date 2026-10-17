@@ -9,6 +9,9 @@ www/audio/
 # 音频生成的中间产物（原始合成 MP3、索引、断点续传清单）
 .work/
 
+# 小程序分包音频（由 scripts/miniapp_extract.py 从 .work 池硬链接生成，可重建）
+miniapp/packages/*/audio/
+
 # Android 构建产物（原生工程本身保留在版本库）
 android/.gradle/
 android/build/

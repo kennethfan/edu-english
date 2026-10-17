@@ -1,0 +1,87 @@
+/* 全局基线 + 双主题 CSS 变量
+ * 用法：页面根节点绑定 theme-dark / theme-kids（core/theme.js），
+ * 所有组件样式只引用 var(--x)，切主题零 JS 改样式。 */
+
+/* ---- 冷峻深色（石墨蓝灰，默认） ---- */
+.theme-dark {
+  --bg: #171b26;
+  --card: #1f2430;
+  --card-hi: #2a3040;
+  --border: #333a4c;
+  --text: #e9ebf2;
+  --muted: #9aa3b8;
+  --accent: #3d7bfd;
+  --accent-2: #8b6cff;
+  --ok: #4ade80;
+  --bad: #f87171;
+  --warn: #facc15;
+  --radius: 20rpx;
+  --radius-sm: 12rpx;
+  --shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.28);
+}
+
+/* ---- 儿童活泼（暖奶油） ---- */
+.theme-kids {
+  --bg: #fff6ea;
+  --card: #ffffff;
+  --card-hi: #fff1de;
+  --border: #ffe0bd;
+  --text: #43342a;
+  --muted: #a08b78;
+  --accent: #ff8a3d;
+  --accent-2: #ffb100;
+  --ok: #2fb56f;
+  --bad: #ff6b6b;
+  --warn: #ff9d00;
+  --radius: 28rpx;
+  --radius-sm: 18rpx;
+  --shadow: 0 10rpx 26rpx rgba(255, 138, 61, 0.18);
+}
+
+page {
+  background: #171b26;
+  font-size: 28rpx;
+}
+
+/* 页面根容器：铺满全屏并吃掉主题底色 */
+.wrap {
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.25s ease;
+}
+
+/* ---- 通用卡片 ---- */
+.card {
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 24rpx;
+  margin: 24rpx;
+}
+
+/* ---- 主按钮（去微信默认） ---- */
+.btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  border: none;
+}
+
+.btn::after {
+  border: none;
+}
+
+/* ---- 工具色 ---- */
+.ok { color: var(--ok); }
+.bad { color: var(--bad); }
+.muted { color: var(--muted); }
+
+.log {
+  font-size: 24rpx;
+  color: var(--muted);
+  margin-top: 8rpx;
+  word-break: break-all;
+}

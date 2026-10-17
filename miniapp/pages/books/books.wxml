@@ -1,0 +1,72 @@
+<view class="wrap {{themeCls}}">
+  <!-- 顶栏：标题 + 主题切换 + 错题本 -->
+  <view class="head">
+    <view class="head-row">
+      <view>
+        <view class="head-title">单词对对碰</view>
+        <view class="head-sub">{{totalBooks}} 册 · 点开即学，进度自动保存</view>
+      </view>
+      <view class="head-actions">
+        <view class="icon-btn" bindtap="toggleTheme" hover-class="icon-btn-hover">
+          {{theme === 'dark' ? '🧸' : '🌙'}}
+        </view>
+        <view class="wrong-entry" bindtap="openWrong" hover-class="wrong-entry-hover">
+          <view class="wrong-entry-title">📝 错题本</view>
+          <view class="wrong-entry-count">{{wrongCount > 0 ? wrongCount + ' 个错词' : '暂无错词'}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 总进度 -->
+    <view class="stat">
+      <view class="stat-num">
+        <text class="stat-big">{{statPercent}}%</text>
+        <text class="stat-sub">已学 {{statDone}} / {{statTotal}} 关</text>
+      </view>
+      <view class="stat-bar">
+        <view class="stat-fill" style="width: {{statPercent}}%"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 双栏：左侧学段栏 + 右侧书册列表 -->
+  <view class="body">
+    <view class="side">
+      <view
+        wx:for="{{side}}"
+        wx:key="*this"
+        class="side-item {{activeStage === item ? 'is-active' : ''}}"
+        data-stage="{{item}}"
+        bindtap="switchTab"
+      >{{item}}</view>
+    </view>
+
+    <view class="main">
+      <view
+        wx:for="{{books}}"
+        wx:key="id"
+        class="book {{b.finished ? 'is-finished' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="openBook"
+        hover-class="book-hover"
+      >
+        <view class="book-top">
+          <view class="book-label">{{item.label}}</view>
+          <view class="book-badge" wx:if="{{item.finished}}">✓</view>
+        </view>
+        <view class="book-meta">{{item.levelCount}} 关 · {{item.wordCount}} 词 · {{item.stage}}</view>
+        <view class="book-progress">
+          <view class="bar">
+            <view class="bar-fill {{item.finished ? 'is-full' : ''}}" style="width: {{item.percent}}%"></view>
+          </view>
+          <view class="bar-text">{{item.finished ? '完成' : item.done + '/' + item.total}}</view>
+        </view>
+      </view>
+      <view wx:if="{{!books.length}}" class="empty-tip">该学段暂无册次</view>
+    </view>
+  </view>
+
+  <view class="foot">
+    <navigator url="/pages/index/index" open-type="navigateBack" class="foot-link">系统自检</navigator>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+<view class="wrap {{themeCls}}">
+  <view class="head">
+    <view class="head-title">错题本</view>
+    <view class="head-sub">答错的词自动记在这里，答对也不会自动移除</view>
+  </view>
+
+  <!-- 空态 -->
+  <view wx:if="{{!total}}" class="empty">
+    <view class="empty-emoji">📝</view>
+    <view class="empty-text">还没有错词，去配对里答错几个试试</view>
+  </view>
+
+  <!-- 列表 -->
+  <view wx:else>
+    <view
+      wx:for="{{items}}"
+      wx:key="en"
+      class="word"
+      data-en="{{item.en}}"
+      bindtap="speak"
+      hover-class="word-hover"
+    >
+      <view class="word-main">
+        <view class="word-en">{{item.en}} <text class="word-count">×{{item.count}}</text></view>
+        <view class="word-zh">{{item.zh}} · {{item.bookLabel}}</view>
+      </view>
+      <view class="word-speak">🔊</view>
+      <view class="word-del" data-en="{{item.en}}" catchtap="remove">✕</view>
+    </view>
+
+    <view class="actions">
+      <button class="btn act-btn" bindtap="drill">▶ 错词重刷（{{total}} 词）</button>
+      <button class="act-btn act-clear" bindtap="clearAll">清空错题本</button>
+    </view>
+  </view>
+</view>

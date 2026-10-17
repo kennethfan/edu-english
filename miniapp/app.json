@@ -1,0 +1,187 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/books/books",
+    "pages/game/game",
+    "pages/wrong/wrong"
+  ],
+  "subpackages": [
+    {
+      "root": "packages/b01",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b02",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b03",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b04",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b05",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b06",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b07",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b08",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b09",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b10",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b11",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b12",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b13",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b14",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b15",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b16",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b17",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b18",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b19",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b20",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b21",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b22",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b23",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b24",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b25",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b26",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b27",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    },
+    {
+      "root": "packages/b28",
+      "pages": [
+        "pages/blank/blank"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#171b26",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "单词对对碰",
+    "backgroundColor": "#171b26",
+    "backgroundTextStyle": "light"
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

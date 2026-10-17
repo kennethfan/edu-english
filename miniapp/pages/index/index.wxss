@@ -1,0 +1,198 @@
+.wrap {
+  padding: 40rpx 32rpx 60rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Hero ---- */
+.hero {
+  padding: 30rpx 8rpx 10rpx;
+}
+
+.hero-title {
+  font-size: 60rpx;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 2rpx;
+}
+
+.hero-sub {
+  margin-top: 10rpx;
+  font-size: 25rpx;
+  color: var(--muted);
+  letter-spacing: 1rpx;
+}
+
+/* ---- 总进度 ---- */
+.stat {
+  margin-top: 34rpx;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 28rpx 30rpx;
+}
+
+.stat-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20rpx;
+}
+
+.stat-big {
+  font-size: 64rpx;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.theme-kids .stat-big {
+  background: none;
+  -webkit-background-clip: initial;
+  color: var(--accent);
+}
+
+.stat-sub {
+  font-size: 25rpx;
+  color: var(--muted);
+}
+
+.stat-bar {
+  margin-top: 18rpx;
+  height: 12rpx;
+  border-radius: 6rpx;
+  background: var(--card-hi);
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 6rpx;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.4s ease;
+}
+
+/* ---- 主 CTA ---- */
+.cta {
+  margin-top: 30rpx;
+  width: 100%;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  padding: 30rpx 0;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
+}
+
+.cta::after {
+  border: none;
+}
+
+.cta-hover {
+  transform: scale(0.98);
+}
+
+.cta-main {
+  font-size: 36rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+}
+
+.cta-sub {
+  margin-top: 8rpx;
+  font-size: 23rpx;
+  opacity: 0.85;
+}
+
+/* ---- 功能入口 ---- */
+.entries {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 24rpx;
+}
+
+.entry {
+  position: relative;
+  flex: 1;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 30rpx 0;
+  text-align: center;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.entry-hover {
+  transform: scale(0.97);
+  border-color: var(--accent);
+}
+
+.entry-icon {
+  font-size: 44rpx;
+}
+
+.entry-name {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.entry-badge {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  min-width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 999rpx;
+  background: var(--bad);
+  color: #fff;
+  font-size: 21rpx;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+}
+
+/* ---- 系统诊断（折叠） ---- */
+.diag {
+  margin-top: auto;
+  padding-top: 60rpx;
+}
+
+.diag-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 24rpx;
+  color: var(--muted);
+  padding: 16rpx 0;
+}
+
+.diag-arrow {
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.diag-arrow.is-open {
+  transform: rotate(90deg);
+}
+
+.diag-body {
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 24rpx;
+}
+
+.diag-summary {
+  font-size: 24rpx;
+  color: var(--muted);
+  margin-bottom: 8rpx;
+}
+
+.diag-btn {
+  margin: 12rpx 0;
+  font-size: 26rpx;
+}

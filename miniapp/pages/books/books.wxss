@@ -1,0 +1,266 @@
+.wrap {
+  padding: 24rpx 24rpx 60rpx;
+}
+
+/* ---- 顶栏 ---- */
+.head {
+  padding: 12rpx 8rpx 8rpx;
+}
+
+.head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.head-title {
+  font-size: 46rpx;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 1rpx;
+}
+
+.head-sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: var(--muted);
+}
+
+.head-actions {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.icon-btn {
+  width: 76rpx;
+  height: 76rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+}
+
+.icon-btn-hover {
+  transform: scale(0.94);
+}
+
+.wrong-entry {
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 12rpx 20rpx;
+  text-align: right;
+}
+
+.wrong-entry-hover {
+  border-color: var(--accent);
+}
+
+.wrong-entry-title {
+  font-size: 24rpx;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.wrong-entry-count {
+  margin-top: 2rpx;
+  font-size: 20rpx;
+  color: var(--warn);
+}
+
+/* ---- 总进度 ---- */
+.stat {
+  margin-top: 24rpx;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 24rpx 26rpx;
+}
+
+.stat-num {
+  display: flex;
+  align-items: baseline;
+  gap: 18rpx;
+}
+
+.stat-big {
+  font-size: 52rpx;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.theme-kids .stat-big {
+  background: none;
+  -webkit-background-clip: initial;
+  color: var(--accent);
+}
+
+.stat-sub {
+  font-size: 24rpx;
+  color: var(--muted);
+}
+
+.stat-bar {
+  margin-top: 16rpx;
+  height: 12rpx;
+  border-radius: 6rpx;
+  background: var(--card-hi);
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 6rpx;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.4s ease;
+}
+
+/* ---- 双栏布局 ---- */
+.body {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 24rpx;
+}
+
+/* 左栏：学段 */
+.side {
+  width: 172rpx;
+  flex-shrink: 0;
+  position: sticky;
+  top: 24rpx;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.side-item {
+  position: relative;
+  padding: 28rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: var(--muted);
+  border-left: 6rpx solid transparent;
+  transition: all 0.15s ease;
+}
+
+.side-item.is-active {
+  color: var(--accent);
+  font-weight: 700;
+  background: var(--card-hi);
+  border-left-color: var(--accent);
+}
+
+/* 右栏：书册列表（单列行卡） */
+.main {
+  flex: 1;
+  min-width: 0;
+  padding-left: 20rpx;
+}
+
+.empty-tip {
+  padding: 80rpx 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 25rpx;
+}
+
+.book {
+  box-sizing: border-box;
+  width: 100%;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 24rpx 26rpx;
+  margin-bottom: 16rpx;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.book-hover {
+  transform: scale(0.98);
+  border-color: var(--accent);
+}
+
+.book.is-finished {
+  border-color: var(--ok);
+}
+
+.book-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-label {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.book-badge {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 22rpx;
+  color: #fff;
+  background: var(--ok);
+}
+
+.book-meta {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.book-progress {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.bar {
+  flex: 1;
+  height: 10rpx;
+  border-radius: 5rpx;
+  background: var(--card-hi);
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 5rpx;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.3s ease;
+}
+
+.bar-fill.is-full {
+  background: var(--ok);
+}
+
+.bar-text {
+  font-size: 21rpx;
+  color: var(--muted);
+  min-width: 64rpx;
+  text-align: right;
+}
+
+/* ---- 页脚 ---- */
+.foot {
+  margin-top: 44rpx;
+  text-align: center;
+}
+
+.foot-link {
+  font-size: 24rpx;
+  color: var(--muted);
+  text-decoration: underline;
+}

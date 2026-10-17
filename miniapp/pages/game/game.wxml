@@ -1,0 +1,83 @@
+<view class="wrap {{themeCls}}">
+
+  <!-- 加载态 -->
+  <view wx:if="{{loading}}" class="state">
+    <view class="spinner"></view>
+    <view class="state-text">正在加载《{{bookLabel}}》…</view>
+  </view>
+
+  <!-- 加载失败 -->
+  <view wx:elif="{{loadError}}" class="state">
+    <view class="state-text bad">{{loadError}}</view>
+    <button class="btn state-btn" bindtap="goBooks">返回选册</button>
+  </view>
+
+  <view wx:else class="stage">
+    <!-- HUD -->
+    <view class="hud">
+      <view class="hud-book">{{bookLabel}}</view>
+      <view class="hud-right">
+        <view class="hud-counter">第 {{levelIndex + 1}} / {{levelCount}} 关</view>
+        <button class="auto-btn {{autoMode ? 'is-on' : ''}}" size="mini" bindtap="toggleAuto">
+          {{autoMode ? '退出学习' : '自动学习'}}
+        </button>
+      </view>
+    </view>
+    <view class="pbar">
+      <view class="pbar-fill" style="width: {{(levelIndex + 1) * 100 / levelCount}}%"></view>
+    </view>
+
+    <!-- 自动学习状态条 -->
+    <view wx:if="{{autoMode}}" class="autobar {{autoPaused ? 'is-paused' : ''}}">
+      <view class="autobar-text">{{autoPaused ? '已暂停' : '自动学习中 · 点英文跟读'}}</view>
+      <button class="autobar-btn" size="mini" bindtap="toggleAutoPause">{{autoPaused ? '继续' : '暂停'}}</button>
+    </view>
+
+    <!-- 标题行 + 过关提示（覆盖式，不占位） -->
+    <view class="titlebar">
+      <view class="title">选择配对</view>
+      <view class="theme-chip" wx:if="{{theme}}">{{theme}}</view>
+      <view class="flash {{flashCls}}" wx:if="{{flash}}">{{flash}}</view>
+    </view>
+
+    <!-- 棋盘 -->
+    <view class="board">
+      <view class="col">
+        <view
+          wx:for="{{leftCards}}"
+          wx:key="uid"
+          class="card-w {{item.done ? 'is-done' : ''}} {{item.ok ? 'is-ok' : ''}} {{item.wrong ? 'is-wrong' : ''}} {{item.sel ? 'is-sel' : ''}}"
+          data-side="L" data-uid="{{item.uid}}"
+          bindtap="pick"
+        >
+          <view class="card-text">{{item.text}}</view>
+          <view class="card-speak" wx:if="{{!item.done}}">🔊</view>
+        </view>
+      </view>
+      <view class="col">
+        <view
+          wx:for="{{rightCards}}"
+          wx:key="uid"
+          class="card-w {{item.done ? 'is-done' : ''}} {{item.ok ? 'is-ok' : ''}} {{item.wrong ? 'is-wrong' : ''}} {{item.sel ? 'is-sel' : ''}}"
+          data-side="R" data-uid="{{item.uid}}"
+          bindtap="pick"
+        >
+          <view class="card-text">{{item.text}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部导航 -->
+    <view class="nav">
+      <button class="nav-btn" size="mini" disabled="{{!hasPrev}}" bindtap="prevLevel">上一关</button>
+      <view class="nav-mid" bindtap="redoLevel">重做本关</view>
+      <button class="nav-btn" size="mini" disabled="{{!hasNext}}" bindtap="nextLevel">下一关</button>
+    </view>
+
+    <!-- 本册完成态 -->
+    <view wx:if="{{bookEnd}}" class="endbar">
+      <view class="endbar-text">{{drillMode ? levelCount + ' 组错词全部重刷完成' : '本册 ' + levelCount + ' 关全部完成' + (doneAll ? '，可随时重刷' : '')}}</view>
+      <button class="btn endbar-btn" bindtap="goBooks">{{drillMode ? '返回' : '返回选册'}}</button>
+    </view>
+  </view>
+</view>

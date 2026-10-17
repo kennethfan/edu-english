@@ -1,0 +1,319 @@
+.wrap {
+  padding: 24rpx 24rpx 60rpx;
+}
+
+/* ---- 加载 / 错误态 ---- */
+.state {
+  padding: 200rpx 40rpx;
+  text-align: center;
+}
+
+.state-text {
+  margin-top: 24rpx;
+  color: var(--muted);
+  font-size: 28rpx;
+}
+
+.state-btn {
+  margin-top: 40rpx;
+  width: 320rpx;
+}
+
+.spinner {
+  width: 64rpx;
+  height: 64rpx;
+  margin: 0 auto;
+  border: 6rpx solid var(--card-hi);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- HUD ---- */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rpx 4rpx;
+}
+
+.hud-book {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.hud-counter {
+  font-size: 25rpx;
+  color: var(--muted);
+}
+
+.auto-btn {
+  background: var(--card);
+  color: var(--ok);
+  border: 1rpx solid var(--border);
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  padding: 0 20rpx;
+  line-height: 2.1;
+  font-weight: 600;
+}
+
+.auto-btn.is-on {
+  color: var(--bad);
+  border-color: var(--bad);
+}
+
+.auto-btn::after {
+  border: none;
+}
+
+/* ---- 总进度条 ---- */
+.pbar {
+  height: 10rpx;
+  background: var(--card-hi);
+  border-radius: 5rpx;
+  overflow: hidden;
+  margin: 14rpx 4rpx 0;
+}
+
+.pbar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 5rpx;
+  transition: width 0.3s ease;
+}
+
+/* ---- 自动学习状态条 ---- */
+.autobar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16rpx;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 14rpx 22rpx;
+}
+
+.autobar.is-paused {
+  border-color: var(--warn);
+}
+
+.autobar-text {
+  font-size: 24rpx;
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.autobar.is-paused .autobar-text {
+  color: var(--warn);
+}
+
+.autobar-btn {
+  background: var(--card-hi);
+  color: var(--text);
+  border: none;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  padding: 0 18rpx;
+  line-height: 2;
+}
+
+.autobar-btn::after {
+  border: none;
+}
+
+/* ---- 标题行（过关提示覆盖式显示） ---- */
+.titlebar {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 18rpx;
+  padding: 30rpx 4rpx 22rpx;
+  min-height: 68rpx;
+}
+
+.title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.theme-chip {
+  font-size: 22rpx;
+  color: var(--accent);
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: 999rpx;
+  padding: 4rpx 18rpx;
+}
+
+.flash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 22rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: 800;
+  animation: pop 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.flash.perfect { color: var(--warn); }
+.flash.good { color: var(--ok); }
+.flash.finish { color: var(--ok); }
+
+@keyframes pop {
+  0% { transform: scale(0.5) translateY(10rpx); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* ---- 棋盘 ---- */
+.board {
+  display: flex;
+  gap: 22rpx;
+  margin-top: 6rpx;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.card-w {
+  position: relative;
+  background: var(--card);
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius);
+  padding: 30rpx 24rpx;
+  transition: background-color 0.16s ease, border-color 0.16s ease,
+              transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+/* 选中：描边 + 微升 + 辉光 */
+.card-w.is-sel {
+  border-color: var(--accent);
+  background: var(--card-hi);
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 24rpx rgba(47, 111, 237, 0.25);
+}
+
+.theme-kids .card-w.is-sel {
+  box-shadow: 0 8rpx 24rpx rgba(255, 138, 61, 0.3);
+}
+
+/* 配对成功：绿辉光闪 */
+.card-w.is-ok {
+  border-color: var(--ok);
+  background: var(--card-hi);
+  animation: okflash 0.5s ease;
+}
+
+.card-w.is-done {
+  opacity: 0.35;
+}
+
+/* 错配：红抖 */
+.card-w.is-wrong {
+  border-color: var(--bad);
+  background: var(--card-hi);
+  animation: shake 0.32s ease;
+}
+
+@keyframes okflash {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45); }
+  40% { transform: scale(1.05); box-shadow: 0 0 0 16rpx rgba(74, 222, 128, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-12rpx); }
+  50% { transform: translateX(12rpx); }
+  75% { transform: translateX(-8rpx); }
+}
+
+.card-text {
+  font-size: 31rpx;
+  color: var(--text);
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.card-speak {
+  position: absolute;
+  right: 16rpx;
+  top: 12rpx;
+  font-size: 22rpx;
+  opacity: 0.5;
+}
+
+/* ---- 底部导航 ---- */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40rpx;
+  padding: 0 8rpx;
+}
+
+.nav-btn {
+  background: var(--card);
+  color: var(--text);
+  border: 1rpx solid var(--border);
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  padding: 0 30rpx;
+}
+
+.nav-btn[disabled] {
+  color: var(--muted);
+  opacity: 0.5;
+  background: var(--card);
+}
+
+.nav-btn::after {
+  border: none;
+}
+
+.nav-mid {
+  font-size: 24rpx;
+  color: var(--muted);
+  text-decoration: underline;
+  padding: 8rpx 20rpx;
+}
+
+/* ---- 完成态 ---- */
+.endbar {
+  margin-top: 44rpx;
+  background: var(--card);
+  border: 1rpx solid var(--ok);
+  border-radius: var(--radius);
+  padding: 34rpx;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.endbar-text {
+  color: var(--ok);
+  font-size: 29rpx;
+  font-weight: 700;
+}
+
+.endbar-btn {
+  margin-top: 26rpx;
+  width: 320rpx;
+}
