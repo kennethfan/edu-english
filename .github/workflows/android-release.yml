@@ -1,6 +1,6 @@
-name: Android Release
+name: Android & iOS Release
 
-# 推送 v* 标签（如 v0.1.1）自动打包 APK 并发 GitHub Release；也可手动触发
+# 推送 v* 标签（如 v0.1.1）自动打包 APK/IPA 并发 GitHub Release；也可手动触发
 on:
   push:
     tags: ['v*']
@@ -64,3 +64,59 @@ jobs:
         with:
           files: dist/*.apk
           generate_release_notes: true
+
+  build-ios:
+    needs: build          # 等 Android 发布完，往同一个 Release 追加
+    runs-on: macos-latest
+    steps:
+      - name: 检出 master
+        uses: actions/checkout@v4
+
+      - name: 检出音频（gh-pages）
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: ghpages
+          sparse-checkout: audio
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 补齐发音音频
+        run: mkdir -p www/audio && cp ghpages/audio/*.ogg www/audio/
+
+      - name: 构建 Web 资产并同步到双端
+        run: |
+          npm ci
+          npm run sync
+
+      - name: 注入版本号（tag → MARKETING_VERSION）
+        run: |
+          V="${GITHUB_REF_NAME#v}"
+          sed -i '' -E "s/MARKETING_VERSION = [^;]+;/MARKETING_VERSION = ${V};/g" \
+            ios/App/App.xcodeproj/project.pbxproj
+          grep MARKETING_VERSION ios/App/App.xcodeproj/project.pbxproj | head -2
+
+      - name: Xcode 编译（无签名）
+        working-directory: ios/App
+        run: |
+          xcodebuild -project App.xcodeproj -target App -configuration Release \
+            -sdk iphoneos -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+            build 2>&1 | tail -30
+
+      - name: 整理 IPA（未签名，Payload 打包）
+        run: |
+          V="${GITHUB_REF_NAME#v}"
+          mkdir -p dist/Payload
+          cp -r ios/App/build/Build/Products/Release-iphoneos/App.app dist/Payload/
+          cd dist
+          zip -qry "word-match-ios-v${V}.ipa" Payload
+          rm -rf Payload
+
+      - name: 发布 GitHub Release（追加 IPA）
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.ipa
