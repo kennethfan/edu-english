@@ -102,8 +102,9 @@ jobs:
       - name: Xcode 编译（无签名）
         working-directory: ios/App
         run: |
+          set -o pipefail
           xcodebuild -project App.xcodeproj -target App -configuration Release \
-            -sdk iphoneos -derivedDataPath build \
+            -sdk iphoneos SYMROOT="$(pwd)/build" \
             CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
             build 2>&1 | tail -30
 
@@ -111,7 +112,7 @@ jobs:
         run: |
           V="${GITHUB_REF_NAME#v}"
           mkdir -p dist/Payload
-          cp -r ios/App/build/Build/Products/Release-iphoneos/App.app dist/Payload/
+          cp -r ios/App/build/Release-iphoneos/App.app dist/Payload/
           cd dist
           zip -qry "word-match-ios-v${V}.ipa" Payload
           rm -rf Payload
