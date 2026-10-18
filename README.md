@@ -110,7 +110,7 @@ npx cap sync ios                     # www → 原生工程（SPM 模式，无�
 
 ### CI 自动打包（Android + iOS）
 
-推 `v*` 标签即触发 [android-release.yml](.github/workflows/android-release.yml)：
+推 `v*` 标签即触发 [release.yml](.github/workflows/release.yml)：
 
 ```bash
 git tag v0.1.2 && git push origin v0.1.2
