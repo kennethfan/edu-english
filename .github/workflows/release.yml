@@ -110,11 +110,10 @@ jobs:
 
       - name: 整理 IPA（未签名，Payload 打包）
         run: |
-          V="${GITHUB_REF_NAME#v}"
           mkdir -p dist/Payload
           cp -r ios/App/build/Release-iphoneos/App.app dist/Payload/
           cd dist
-          zip -qry "word-match-ios-v${V}.ipa" Payload
+          zip -qry "单词对对碰-${GITHUB_REF_NAME}.ipa" Payload
           rm -rf Payload
 
       - name: 发布 GitHub Release（追加 IPA）
