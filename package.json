@@ -5,6 +5,7 @@
   "description": "单词对对碰 — 单词匹配游戏 Android 应用（Capacitor 封装，零重写）",
   "type": "module",
   "scripts": {
+    "tauri": "tauri",
     "prepare:www": "node scripts/prepare-www.mjs",
     "build:web": "esbuild src/shim.js --bundle --format=iife --target=es2019 --minify --outfile=www/shim.js",
     "sync": "npm run prepare:www && npm run build:web && cap sync",
