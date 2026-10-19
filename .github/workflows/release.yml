@@ -128,12 +128,17 @@ jobs:
       matrix:
         settings:
           # macOS 双架构分开出包（arm64 Apple Silicon / x64 Intel）
+          # targets 字段：交叉编译前 rustup 需装对应 target
           - platform: macos-latest
             args: '--target aarch64-apple-darwin'
+            targets: 'aarch64-apple-darwin'
           - platform: macos-latest
             args: '--target x86_64-apple-darwin'
+            targets: 'x86_64-apple-darwin'
+          # Linux 包管理器（deb/rpm/AppImage）要求包名 ASCII，
+          # 用 override config 覆盖 productName（窗口标题仍是中文）
           - platform: ubuntu-22.04
-            args: ''
+            args: '--config src-tauri/tauri.linux.conf.json'
           - platform: windows-latest
             args: ''
     runs-on: ${{ matrix.settings.platform }}
@@ -154,6 +159,8 @@ jobs:
           cache: npm
 
       - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.settings.targets }}
 
       # Rust 编译缓存（首次 ~15 分钟，命中缓存后 ~5 分钟）
       - uses: Swatinem/rust-cache@v2
