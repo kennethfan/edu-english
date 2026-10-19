@@ -156,7 +156,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
 
       # Rust 编译缓存（首次 ~15 分钟，命中缓存后 ~5 分钟）
-      - uses: swatinom/rust-cache@v2
+      - uses: Swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
 
