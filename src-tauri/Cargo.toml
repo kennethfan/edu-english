@@ -1,0 +1,18 @@
+[package]
+name = "wordmatch"
+version = "0.1.0"
+description = "单词对对碰 - 人教版小学/初中/高中 + 大学四六级单词配对练习"
+edition = "2021"
+
+# 二进制名用 ASCII，产物文件名由 productName 决定
+[lib]
+name = "wordmatch_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
