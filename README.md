@@ -1,11 +1,11 @@
 # 单词对对碰
 
-人教版小学 / 初中 / 高中 + 大学四六级词库的**单词配对练习**工具，四端同源：
-**网页版（GitHub Pages）** + **微信小程序** + **Android App（Capacitor）** + **iOS App（Capacitor）**，
+人教版小学 / 初中 / 高中 + 大学四六级词库的**单词配对练习**工具，五端同源：
+**网页版（GitHub Pages）** + **微信小程序** + **Android App（Capacitor）** + **iOS App（Capacitor）** + **桌面端（Tauri 2）**，
 判分 / 出题 / 音频逻辑逐字节一致。
 
 - **网页版（免安装，即开即玩）**：https://kennethfan.github.io/edu-english/
-- **Android APK / iOS IPA**：推 `v*` 标签自动打包发布到 [Releases](https://github.com/kennethfan/edu-english/releases)（iOS 为无签名 IPA，需侧载安装）
+- **Android APK / iOS IPA / 桌面安装包**：推 `v*` 标签自动打包发布到 [Releases](https://github.com/kennethfan/edu-english/releases)（iOS 为无签名 IPA，需侧载安装；桌面端含 macOS（arm64/x64）/ Windows / Linux 安装包）
 - 词库：26 册 · 3442 关 · 13632 词条 · 9085 条发音音频（离线可玩）
 - 功能：选册续玩、配对玩法、进度持久化、自动学习（自动配对跟读）、错题本（错词重刷）
 - 双主题：儿童模式（暖奶油，默认）/ 深色模式（石墨蓝灰），右下角浮动钮切换
@@ -27,7 +27,7 @@
 | 📝 错题本 | 错词自动收集，支持错词重刷（判分与正卡同源）、单个删除、一键清空 |
 | 💾 进度持久化 | 每册每关进度自动保存，重开续玩不丢进度 |
 | 🎨 双主题 | 儿童模式（暖奶油，默认）/ 深色模式（石墨蓝灰），右下角浮动钮切换，三端一致 |
-| 🔗 四端同源 | 网页版 / 微信小程序 / Android App / iOS App 判分、出题、音频逻辑逐字节一致 |
+| 🔗 五端同源 | 网页版 / 微信小程序 / Android / iOS / 桌面端（Tauri 2）判分、出题、音频逻辑逐字节一致 |
 
 ## 仓库结构
 
@@ -44,9 +44,10 @@
 │   ├── core/                            #   pkgs/loaders/game/store/theme/audiomap/books-meta
 │   ├── pages/                           #   index（首页）/ books（选册）/ game（配对）/ wrong（错题本）
 │   └── packages/b01..b28/               #   分包（data.js + 占位页；audio/ 为生成产物不入库）
-├── www/                                 # 网页版 / Android App / iOS App 的 Web 资产（生成产物）
+├── www/                                 # 网页版 / Android / iOS / 桌面端 的 Web 资产（生成产物）
 ├── android/                             # Capacitor 8 原生工程
 ├── ios/                                 # Capacitor 8 原生工程（SPM 模式，无需 CocoaPods）
+├── src-tauri/                           # Tauri 2 桌面端工程（frontendDist → ../www）
 └── docs/                                # 设计文档 / ADR
 ```
 
@@ -108,16 +109,29 @@ npx cap sync ios                     # www → 原生工程（SPM 模式，无�
 # Xcode 打开 ios/App/App.xcodeproj 构建运行
 ```
 
-### CI 自动打包（Android + iOS）
+### 桌面端（Tauri 2）
+
+```bash
+node scripts/prepare-www.mjs         # www/ 为 Tauri frontendDist
+npm install                          # devDependencies 含 @tauri-apps/cli
+npx tauri dev                        # 本地开发调试（需 Rust 工具链）
+npx tauri build                      # 产物在 src-tauri/target/release/bundle/
+```
+
+### CI 自动打包（Android + iOS + 桌面）
 
 推 `v*` 标签即触发 [release.yml](.github/workflows/release.yml)：
 
 ```bash
-git tag v0.1.2 && git push origin v0.1.2
+git tag v0.1.5 && git push origin v0.1.5
 ```
 
 - Android job（ubuntu）：gh-pages 取音频 → sync → tag 注入 versionName → `assembleDebug` → Release 发 APK
 - iOS job（macos）：同源资产 → tag 注入 MARKETING_VERSION → 无签名 `xcodebuild` → Payload 打包 → 同一 Release 追加 IPA
+- 桌面 job（macos ×2 / ubuntu / windows 矩阵）：同源资产 → tag 注入 tauri.conf 版本 → `tauri-action` 打包
+  - macOS：aarch64 + x86_64 各一个 dmg
+  - Windows：NSIS exe + msi
+  - Linux：AppImage + deb
 - iOS IPA **未签名**（路线 A）：仅可侧载（AltStore / TrollStore）或模拟器安装；有开发者账号后在 CI 配 p12 + 描述文件 secrets 即可出签名包
 
 ### 生成产物（不入库，可重建）
